@@ -1,0 +1,80 @@
+link标签和@import的区别
+
+相同点：两者都可以引入外部样式
+不同点：
+1、从属关系不同
+link标签是HTML中标签，不仅可以加载样式，还可以定义一些属性ref
+@import是css提供语法规则，其作用只有一个引入外部样式
+
+2、加载顺序不同
+link标签与页面同时加载
+@import引入的css样式，是在页面加载完毕后样式才被加载
+
+3、兼容性不同
+link属于HTML中的标签，无兼容问题
+@import是css2.1才有的语法，兼容IE5+
+
+4、DOM操作不同
+link是一个标签，可以通过DOM操作这个标签，引入样式
+@import是css样式层的东西，没有办法进行DOM操作
+
+如果了解了@import原理，你就会明白它的性能并不高，过多使用它会延长浏览器渲染页面的时间。
+
+@import可以在css中引入其他样式表利于修改和扩展。
+
+代码示例如下：
+
+index.css
+
+———————-
+
+@import “test1.css”;
+
+@import “test2.css”;
+
+test1.css
+
+———————-
+
+p {color:blue;}
+
+test2.css
+
+———————-
+
+.mystyle {color:red}
+------------------------------------------------------------------------------------
+
+
+采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。
+display:flex 意思是弹性布局，它能够扩展和收缩 flex 容器内的元素，以最大限度地填充可用空间。Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。
+任何一个容器都可以指定为Flex布局。
+注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
+
+它可以用于以下四个方面：
+1、在不同方向排列元素
+2、重新排列元素的显示顺序
+3、更改元素的对齐方式
+4、动态地将元素装入容器
+
+justify-content属性定义了项目在主轴上的对齐方式。
+.box {
+  justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。
+flex-start（默认值）：左对齐
+flex-end：右对齐
+center： 居中
+space-between：两端对齐，项目之间的间隔都相等。
+space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+
+align-items属性定义项目在交叉轴上如何对齐。
+.box {
+  align-items: flex-start | flex-end | center | baseline | stretch;
+}
+它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。
+flex-start：交叉轴的起点对齐。
+flex-end：交叉轴的终点对齐。
+center：交叉轴的中点对齐。
+baseline: 项目的第一行文字的基线对齐。
+stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。

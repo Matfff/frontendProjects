@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    /* 元素的总高度和宽度包含内边距和边框(padding 与 border) : */
+    /* 默认值:	content-box */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    width: 90vw;
+}
+
+.panel {
+    /* background-size:100% 100%把背景图进行横向和纵向的拉伸，图片比例随之改变，可能导致图像失真 */
+    /* 把背景图扩展至足够大，直至完全覆盖背景区域，图片比例保持不变且不会失真，但某些部分被切割无法显示完整背景图像 */
+    background-size: cover;
+    /* 背景平铺 */
+    background-position: center;
+    /* 背景不重复 */
+    background-repeat: no-repeat;
+    height: 80vh;
+    /* 添加圆角边框 */
+    border-radius: 50px;
+    color: #fff;
+    /* 设置鼠标指针样式 */
+    cursor: pointer;
+    /* flex是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。 */
+    flex: 0.5;
+    margin: 10px;
+    position: relative;
+    /* -webkit-transition：CSS属性(none|all|属性) 持续时间 时间函数 延迟时间 */
+    /* 
+    时间函数(transition-timing-function)：
+    ease：逐渐慢下来
+    linear：线性过度
+    ease-in：由慢到快
+    ease-out：由快到慢
+    ease-in-out：由慢到快在到慢
+    cubic-bezier：特定的cubic-bezier曲线,所有值需在[0, 1]区域内，否则无效。
+     */
+    -webkit-transition: all 700ms ease-in;
+}
+
+.panel h3 {
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    /* 让元素产生透明度 透明度为0 其实际还在*/
+    /* 三种隐藏方式之一 */
+    opacity: 0;
+}
+
+.panel.active {
+    flex: 5;
+}
+
+.panel.active h3 {
+    /* 设置一个div元素的透明度级别： 0.0（完全透明）到1.0（完全不透明） */
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+}
+
+/*当屏幕尺寸小于480px时，应用下面的CSS样式*/
+@media (max-width: 480px) {
+    .container {
+        width: 100vw;
+    }
+
+    /* ele:nth-of-type(n)表示选择父元素下的第 n 个 ele 元素，其中 n 可以是正整数、公式或者关键字。同时， ele 一般是标签选择器 */
+    .panel:nth-of-type(4),
+    .panel:nth-of-type(5) {
+        display: none;
+    }
+}
