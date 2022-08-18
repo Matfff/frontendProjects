@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.bg {
+    background: url('https://images.unsplash.com/photo-1576161787924-01bb08dad4a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2104&q=80') no-repeat center center/cover;
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    /*
+    calc是 css3提供的一个在css文件中计算值的函数：
+    用于动态计算长度值。
+    需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)；
+    任何长度值都可以使用calc()函数进行计算；
+    calc()函数支持 “+”, “-“, “*”, “/” 运算；
+    calc()函数使用标准的数学运算优先级规则；
+    calc(100vh - 10px) 表示整个浏览器窗口高度减去10px的大小
+    calc(100vw - 10px) 表示整个浏览器窗口宽度减去10px的大小 
+     */
+    width: calc(100vw + 60px);
+    height: calc(100vh + 60px);
+    z-index: -1;
+    /*
+    filter 属性定义了元素(通常是<img>)的可视效果(例如：模糊与饱和度)。
+    CSS语法：
+    filter: none | blur() | brightness() | contrast() | drop-shadow() | grayscale() | hue-rotate() | invert() | opacity() | saturate() | sepia() | url()
+    blur(px)：给图像设置高斯模糊。"radius"一值设定高斯函数的标准差，或者是屏幕上以多少像素融在一起， 所以值越大越模糊 
+     */
+    filter: blur(0px);
+}
+
+.loading-text {
+    font-size: 50px;
+    color: #fff;
+}
