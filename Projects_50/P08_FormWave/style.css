@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: steelblue;
+    color: #fff;
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    /*
+    flex-direction:设置主轴的方向,  column:从上到下;  row:默认值从左到右;   row-reverse:从右到左;  column-reverse:从下到上
+    justify-content:设置主轴上的子元素排列方式
+    flex-wrap:设置子元素是否换行
+    align-content:设置侧轴上的子元素的排列方式(多行)
+    align-items:设置侧轴上的子元素的排列方式(单行)
+    flex-flow:复合属性，相当于同时设置了flex-direction和flex-wrap
+    */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px 40px;
+    border-radius: 5px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container a {
+    /* 文本装饰   去掉下划线 */
+    text-decoration: none;
+    color: lightblue;
+}
+
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background: lightblue;
+    padding: 15px;
+    /* 字体样式从  父元素继承 */
+    font-family: inherit;
+    font-size: 16px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.btn:focus {
+    outline: 0;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.text {
+    margin-top: 30px;
+}
+
+.form-control {
+    position: relative;
+    margin: 20px 0 40px;
+    width: 300px;
+}
+
+.form-control input {
+    /* 将背景设置为透明 */
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #fff solid;
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #fff;
+}
+
+/* :valid    input 元素中输入的值为合法 */
+.form-control input:focus,
+.form-control input:valid {
+    /* 去掉轮廓 */
+    outline: 0;
+    border-bottom-color: lightblue;
+}
+
+.form-control label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    /* 
+    pointer-events: none;理解：你可以看的到某个元素，但是你无法摸的着，点击不到，点击会穿透触发到下层的元素 
+    pointer-events: none  去除鼠标事件
+     pointer-events: auto   恢复除鼠标事件 
+    */
+    pointer-events: none;
+}
+
+.form-control label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    /* 缓动效果 https://cubic-bezier.com/ */
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus+label span,
+.form-control input:valid+label span {
+    color: lightblue;
+    transform: translateY(-30px);
+}
