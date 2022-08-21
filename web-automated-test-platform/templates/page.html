@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web自动化测试</title>
+</head>
+
+<style>
+    h1 {text-align:center;}
+    #SUBMIT {text-align:center;}
+    textarea {text-align:left;}
+    #URL {text-align:center;}
+    #HOST {text-align:center;}
+    #CK {text-align:center;}
+    #UA {text-align:center;}
+    #ENCODING {text-align:center;}
+    #TEST {text-align:center;}
+    #CHECKBOX {text-align:center;}
+    #FILE {text-align:center;}
+
+
+
+    body {
+        background: url({% static 'images/moutai.png' %});
+        z-index: -1;/*放在内容背后*/
+        top: 0;
+        left: 0;
+        background-size:16% 35%;
+        background-repeat: no-repeat;
+    }
+</style>
+<body>
+<h1>Web自动化测试</h1>
+    <form method="post" action="/page/" enctype="multipart/form-data">
+        {# **进行token校验 #}
+        {% csrf_token %}
+        <div id="URL">
+            <input type="text" name="url" placeholder="url" size="100">
+        </div>
+
+        <div id="HOST">
+            <input type="text" name="host" placeholder="Host（非必选）" size="100">
+        </div>
+
+        <div id="CK">
+            <input type="text" name="ck" placeholder="cookie（非必填）" size="100">
+        </div>
+
+        <div id="UA">
+            <input type="text" name="ua" placeholder="User-Agent（非必须）" size="100">
+        </div>
+
+        <div id="ENCODING">
+            <input type="text" name="charset" placeholder="encoding（默认utf-8）" size="100">
+        </div>
+{#上传文件#}
+        <div id="FILE">
+            <input type="checkbox" name="checkbox_file" value="file_up" class="check_box">
+            <input type="file" name="file" class="file_upload">
+{# 网速测试#}
+            <button name="network_speed_test" value="speed" >网速测试</button>
+{# 压力测试#}
+            <button name="thread_test_only" value="thread_test_only">压力测试</button>
+        </div>
+
+        <div id="TEST">
+            <select name="test">
+                <option>--selenium测试--</option>
+            </select>
+        </div>
+        {#框架选择#}
+        <div id="CHECKBOX">
+            <input type="checkbox" name="checkbox" value="only" id="flask_" class="check_box"><label for="flask_">通道二</label>
+        </div>
+        {#编译器运行按钮#}
+        <button name="bt" class="bt" value="bt">点击运行</button>
+        {#文本框#}
+        <div id="TEXT">
+            <textarea name="text" cols="100" rows="20" placeholder="">
+{{ text }}
+            </textarea>
+            <textarea name="text2" cols="100" rows="20">
+{{ text2 }}
+            </textarea>
+        </div>
+        {#提交表单#}
+        <p id="SUBMIT">
+            <input type="submit" value="提交" name="submit">
+        </p>
+    </form>
+</body>
+</html>

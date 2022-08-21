@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>压力测试</title>
+</head>
+<style>
+    h1 {text-align: center}
+    #URL {text-align: center}
+    #CK {text-align: center}
+    #UA {text-align: center}
+    #AMOUT {text-align: center}
+    #UA {text-align: center}
+    #SUBMIT {text-align: center}
+
+</style>
+<body>
+<h1>压力测试</h1>
+    <form method="post" action="/thread/">
+        {# **进行token校验 #}
+        {% csrf_token %}
+        <div id="URL">
+            <input type="text" name="url" placeholder="url" size="100">
+        </div>
+        <div id="CK">
+            <input type="text" name="ck" placeholder="cookie（可选）" size="100">
+        </div>
+        <div id="UA">
+            <input type="text" name="ua" placeholder="User-Agent（可选）" size="100">
+        </div>
+        <div id="AMOUT">
+            <input type="text" name="thread_amout" placeholder="线程数量（默认1）" size="100">
+        </div>
+        <p></p>
+        <div id="SUBMIT">
+            <input type="submit" value="提交" name="submit">
+        </div>
+    </form>
+</body>
+</html>

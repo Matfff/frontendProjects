@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试接口</title>
+</head>
+<body>
+<h1>测试接口</h1>
+<form method="post" action="/test/">
+    {% csrf_token %}
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    h1 {text-align: center}
+    #USER {text-align: center}
+    #PWD {text-align: center}
+    #SUBMIT {text-align: center}
+    p {text-align: center}
+</style>
+<body>
+<h1>用户登录</h1>
+<form method="post" action="/login/">
+    {% csrf_token %}
+    <div id="USER">
+        <input type="text" name="user" placeholder="用户名">
+    </div>
+    <div id="PWD">
+        <input type="password" name="pwd" placeholder="密码">
+    </div>
+    <div id="SUBMIT">
+        <input type="submit" value="提交">
+    </div>
+    <p>
+            <span style="color: red;">{{ error_mag }}</span>
+    </p>
+
+</form>
+</body>
+</html>
