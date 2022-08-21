@@ -1,0 +1,3 @@
+hexo init 初始化
+hexo g  生成
+hexo s  静态生成本地页面
