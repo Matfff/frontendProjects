@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+    2. 简历生成
+
+    Step1. 将自己简历里的字段结构化为一个 json 文件
+    Step2. 参考下图，我们对简历显示规则字段做以下约定：
+    "[1|1|1]"：表示一行显示3个字段，以 1:1:1 的形式显示；
+    "[2|1]"：表示一行显示2个字段，以 2:1 的形式显示；
+    "-"： 表示一行显示1个字段，等价于[1]。
+    请按照以上规则，自定义你的简历显示规则。例如："-[1|1|1]---"。
+    Step3. 写一个函数，接受 Step2 设定的规则字符串和 Step1 的 json 为条件: 
+    function generPaper(layoutStr, json){} 
+    生成简历页面，样式自行决定。（也可传入控制显示字段顺序的相关信息）
+    
+    延伸要求：
+    1. 手机端第一个区块部分滚动时依然在顶部
+    2. 页面支持打印
+ -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Json</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-style: normal;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h4 {
+            margin: 30px auto 2px 0;
+            color: dodgerblue;
+            border-bottom: 2px solid dodgerblue;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .container {
+            font-family: 'Muli', sans-serif;
+            display: flex;
+            justify-content: center;
+            width: 800px;
+            height: 2000px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+        }
+        .body {
+            width: 90%;
+            font-size: 14px;
+        }
+
+        .header {
+            position: absolute;
+            margin: 0;
+            text-align: center;
+            width: 718.188px;
+            height: 150px;
+            background-color: #fff;
+            z-index: 999;
+        }
+        .header h3 {
+            text-align: center;
+            margin: 30px 0 10px;
+        }
+
+        .header div,
+        .education div,
+        .work div {
+            display: flex;
+            width: 100%;
+            
+        }
+        .header div span {
+            flex: 1;
+            padding: 0 10px;
+            text-align: center;
+        }
+
+        .education div span,
+        .work div span {
+            flex: 1;
+            margin: 5px 0;
+        }
+
+        .project div {
+            width: 100%;
+        }
+        .project div span {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+        }
+        .project ul {
+            margin-top: 5px;
+        }
+
+        .other div {
+            margin: 5px 0;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="body"></div>
+    </div>
+
+    <script>
+        var body = document.querySelector('.body')
+        let json = {}
+        let layoutStr = ``
+        function generPaper(layoutStr, json) {
+            json = {
+            header: {
+                name: "方远强",
+                phoneNumber: "18627408005",
+                Email: "754229279@qq.com",
+                age: 21,
+                sex: "男",
+                nativePlace: "湖南岳阳"
+            },
+            education: {
+                title:"教育经历",
+                college:"茅台学院",
+                admissionDate:"2018年09月 - 2022年06月",
+                profession:"自动化",
+                honor:"荣誉奖项：校级三好学生"
+            },
+            work:{
+                title:"工作经历",
+                company:["安耐特电子有限公司","遵义长征电器制造有限公司"],
+                workAddress:["东莞","遵义"],
+                post:"实习生",
+                department:"测试部",
+                jobDuties:["通过自动化测试脚本，对各类主板的I/O接口进行功能测试，检测其功能状态是否正常，获取状态数据。","对各类仪器仪表的工作原理进行学习以及安装调试，撰写数据报表"]
+            },
+            project:{
+                title:"项目经历",
+                projects:["电商平台项目","后台管理系统"],
+                projectDescription:["项目描述：仿品优购电商项目，通过CSS+HTML完成该电商平台的注册页面、主页面、商品列表页面、购物车页面、结算页面等， 可进行页面之间的相互跳转",
+                "项目描述：基于vue2技术实现的后台管理项目，采用组件化编程，主要模块有登录页、后台首页、用户管理页、分页模块、用户 数据、路由守卫、权限管理等"],
+                technology:["关键技术：HTML5、CSS3、京东CSS初始化源码、阿里图标库",
+                "关键技术：vue-router、vuex、axios、Element-UI、Mock、Echarts"],
+                content:["1、页面样式主要使用Element-UI进行搭建，Echarts实现数据可视化，包括线型图、柱状图和饼状图",
+                "2、axios封装包括请求拦截器和响应拦截器等，对响应数据、token等进行处理",
+                "3、使用Mock对用户数据、商品及销量数据、token等数据进行模拟",
+                "4、vuex实现组件之间的数据传递"]
+            },
+            other:{
+                title:"其他",
+                certificate:["证书/执照：","计算机（C语言）二级"],
+                personalAdvantage:["个人优势：",
+                "熟悉Python、C语言、MySQL",
+                "熟练掌握HTML、CSS、JavaScript、Vue、AJAX等前端开发技术",
+                "了解Node.js、Linux、Selenium、Django、Bootstrap、Element-UI",
+                "熟练使用 Visual Studio、VSCode、Pycharm、DataGrip 等开发工具",
+                "具有较好的自学能力，对待工作认真负责，积极上进， 与人相处融洽"]
+            }
+        }
+            layoutStr = `            <div class="header">
+                    <h3>${json.header.name}</h3>
+                    <div>
+                        <span style="text-align: right;">${json.header.phoneNumber}</span><span style="text-align: left;">${json.header.Email}</span>
+                    </div>
+                    <div>
+                        <span style="text-align: right;">${json.header.age}</span><span>${json.header.sex}</span><span style="text-align: left;">${json.header.nativePlace}</span>
+                    </div>
+                </div>
+                <div class="education">
+                    <h4 style="margin-top: 150px;">${json.education.title}</h4>
+                    <div>
+                        <span class="bold">${json.education.college}</span> <span style="text-align: right;">${json.education.admissionDate}</span>
+                    </div>
+                    <div>
+                        <span>${json.education.profession}</span> <span style="text-align: right;">${json.education.honor}</span>
+                    </div>
+                </div>
+                <div class="work">
+                    <h4>${json.work.title}</h4>
+                    <div>
+                        <span class="bold">${json.work.company[0]}</span> <span style="text-align: right;">${json.work.workAddress[0]}</span>
+                    </div>
+                    <div>
+                        <span>${json.work.post}</span> <span>${json.work.department}</span>
+                    </div>
+                    <div>
+                        <span>${json.work.jobDuties[0]}</span>
+                    </div>
+                    <div>
+                        <span class="bold">${json.work.company[1]}</span> <span style="text-align: right;">${json.work.workAddress[1]}</span>
+                    </div>
+                    <div>
+                        <span>${json.work.post}</span>
+                    </div>
+                    <div>
+                        <span>${json.work.jobDuties[1]}</span>
+                    </div>
+                </div>
+                <div class="project">
+                    <h4>${json.project.title}</h4>
+                    <div>
+                        <span style="font-weight: 700">${json.project.projects[0]}</span>
+                        <p>${json.project.projectDescription[0]}</p>
+                        <p>${json.project.technology[0]}</p>
+                    </div>
+                    <div>
+                        <span style="font-weight: 700">${json.project.projects[1]}</span>
+                        <p>${json.project.projectDescription[1]}</p>
+                        <p>${json.project.technology[1]}</p>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>${json.project.content[0]}</li>
+                            <li>${json.project.content[1]}</li>
+                            <li>${json.project.content[2]}</li>
+                            <li>${json.project.content[3]}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="other">
+                    <h4>${json.other.title}</h4>
+                    <div>
+                        <span><i class="bold">${json.other.certificate[0]}</i>${json.other.certificate[1]}</span>
+                    </div>
+                    <div>
+                        <span class="bold">${json.other.personalAdvantage[0]}</span>
+                        <ul>
+                            <li>${json.other.personalAdvantage[1]}</li>
+                            <li>${json.other.personalAdvantage[2]}</li>
+                            <li>${json.other.personalAdvantage[3]}</li>
+                            <li>${json.other.personalAdvantage[4]}</li>
+                            <li>${json.other.personalAdvantage[5]}</li>
+                        </ul>
+                    </div>
+                </div>`
+            body.innerHTML = layoutStr
+        } 
+        generPaper()
+
+        var header = document.querySelector('.header')
+        // 页面滚动事件
+        document.addEventListener('scroll', function() {
+            // window.pageYOffset 页面被卷去的头部
+            // console.log(window.pageYOffset);
+            // console.log(header.style)
+            // 当页面被卷去的头部大于等于 50， 改为固定定位
+            if(window.pageYOffset >= 50) {
+                header.style.position = 'fixed'
+                header.style.top = 0 + 'px'
+                header.style.backgroundColor =  '#ccc'
+            } else {
+                header.style.position = 'absolute'
+                header.style.top = '50px'
+                header.style.backgroundColor =  '#fff'
+            }
+        })
+    </script>
+
+</body>
+
+</html>

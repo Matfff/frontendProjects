@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sort</title>
+</head>
+<body>
+    <script>
+        // 1. 数据排序
+        // 假设有如下字符串“A12”，其中“A”表示数据类型（A-Z），“12”表示数据序号（0-9）。
+        // 现在需要对一组数据先按照数据序号再按照数据类型进行排序。
+        // 例如：["B3","D2","F1","A9","D12","A2","C1","Z0","B1"]=>["Z0","B1","C1","F1","A2","D2","B3","A9","D12"]
+
+        let arr = ["B3","D2","F1","A9","D12","A2","C1","Z0","B1"]
+        function compare(arr) {
+            for(let i = 0; i < arr.length - 1; i++) {
+                for(let j = 0; j < arr.length - 1; j++) {
+                    if(Number(arr[j].substring(1)) > Number(arr[j + 1].substring(1))) {
+                        let temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                    if(Number(arr[j].substring(1)) == Number(arr[j + 1].substring(1)) && arr[j].substring(0,1) > arr[j+1].substring(0,1)) {
+                        let temp = arr[j]
+                        arr[j] = arr[j+1]
+                        arr[j+1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+        console.log(arr)
+    </script>
+</body>
+</html>
